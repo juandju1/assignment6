@@ -44,7 +44,6 @@ c.tree3 <- rpart(certified ~ forum.posts + assignment, method = "class", data = 
 c.tree4 <- rpart(certified ~ scale(forum.posts) + grade + assignment, method = "class", data = M1, control = rpart.control(minsplit = 2))
 #We set minsplit = 2 to indicate the minimum numer of nodes that the tree must branch out of. Forum posts are scaled.Here we will be using this variable and settings to evaluate the rest of the data. 
 
-c.tree41 <- rpart(certified ~ scale(forum.posts) + assignment, method = "class", data = M1, control = rpart.control(minsplit = 2))
 
 c.tree5 <- rpart(certified ~ forum.posts, method = "class", data = M1)
 c.tree6 <- rpart(certified ~ assignment, metho = "class", data = M1)
@@ -58,7 +57,6 @@ printcp(c.tree4)
 printcp(c.tree41)
 printcp(c.tree5)
 printcp(c.tree6)
-printcp(c.treeTree)
 
 #Plot your tree
 
@@ -69,7 +67,6 @@ post(c.tree4, file = "tree4.ps", title = "MOOC")
 post(c.tree41, file = "tree41.ps", title = "MOOC")
 post(c.tree5, file = "tree5.ps", title = "MOOC")
 post(c.tree6, file = "tree6.ps", title = "MOOC")
-post(c.treeTree, file = "treeTree.ps", title = "MOOC") 
 ```
 
 #The heading "xerror" in the printcp table stands for "cross validation error", it is the error rate of assigning students to certified/uncertified of the model averaged over 10-fold cross validation. CP stands for "Cost Complexity" and represents the cost in error for adding a node to the tree. Notice it decreases as we add more nodes to the tree which implies that more nodes make better predictions. However, more nodes also mean that we may be making the model less generalizable, this is known as "overfitting".
@@ -93,6 +90,8 @@ M2$predict2 <- predict(c.treePrune, M2, type = "class")
 
 printcp(c.tree4)
 printcp(c.treePrune)
+
+#From the results of both trees, we see that they both have the same error rate. 
 
 #We can see from the error results that both the CP and error rate results are the same. By extension, both trees are similar. 
 
